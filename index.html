@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Regalo para Jhossi</title>
+    <link rel="stylesheet" href="style.css"> <!-- Archivo de estilos externo -->
+</head>
+<body>
+
+    <!-- Reproductor de música oculto -->
+    <audio id="musica" loop>
+        <source src="music.m4a" type="audio/mp4">
+        Tu navegador no soporta el audio.
+    </audio>
+
+    <h1 class="texto">Hola Querida Jhossi</h1>
+    
+    <img src="Gato_Kawaii.gif" alt="Un lindo gato kawaii" width="400">
+    
+    <p class="texto">Sé que mucho pasó, se fue un tiempo y no pensé que volvería, pero aquí está. 
+        Como dijo un viejo sabio, ninguna persona debe estar sola un 14.  
+        Hice esta página como recordatorio de todo lo que significas para mí y de todo lo que siento por ti.  
+        Pero la decisión ahora es tuya, si lo aceptas o no.  
+        <br><br>
+        <strong>FELIZ 14 MON AMOUR ❤️</strong>
+    </p>
+
+    <div class="boton-container">
+        <button class="btn" onclick="mostrarMensajeSi()">SI :3</button>
+        <button class="btn" onclick="insistirNo()">NO :/</button>
+    </div>
+
+    <script>
+        // Reiniciar el contador cada vez que se carga la página
+        sessionStorage.removeItem("intentosNo");
+
+        let intentosNo = 0; // Contador de intentos al presionar "NO"
+        const mensajesNo = [
+            "😢 ¿Segura? Piénsalo bien...",
+            "🥺 Vamos, inténtalo otra vez...",
+            "💔 ¿De verdad me dirás que no?",
+            "😞 Última oportunidad... ¿Segura?",
+            "😢 Ok... Acepto tu decisión,pero aun asi no se librara de mixddd.Es broma tenga un bonito 14 mi querida jhossi"
+        ];
+
+        function mostrarMensajeSi() {
+            alert("💖 ¡Sabía que dirías que sí xddd! con todo lo dicho solo necesito decir....Je l'aime Jhossi (ten bonito dia o noche)💖");
+        }
+
+        function insistirNo() {
+            if (intentosNo < mensajesNo.length - 1) {
+                alert(mensajesNo[intentosNo]);
+                intentosNo++;
+            } else {
+                alert(mensajesNo[intentosNo]); // Mensaje final
+            }
+        }
+
+        // Asegurar que el audio siempre empiece desde el inicio
+        document.addEventListener("DOMContentLoaded", function() {
+            const musica = document.getElementById("musica");
+
+            // Comprobar si hay un estado de reproducción guardado
+            const audioState = localStorage.getItem("audioReproducido");
+
+            if (!audioState || audioState === "false") {
+                musica.currentTime = 0; // Reiniciar el audio
+                musica.play().then(() => {
+                    localStorage.setItem("audioReproducido", "true"); // Guardar estado
+                }).catch(() => {
+                    console.log("Reproducción bloqueada. Esperando interacción del usuario.");
+                });
+            }
+        });
+
+        // Si el usuario cierra la página, se borra el estado para que vuelva a sonar al abrir
+        window.addEventListener("beforeunload", function() {
+            localStorage.removeItem("audioReproducido");
+        });
+
+    </script>
+
+</body>
+</html>
